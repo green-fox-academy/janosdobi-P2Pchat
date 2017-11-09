@@ -1,4 +1,4 @@
-.gradle
+#.gradle
 /build/
 !gradle/wrapper/gradle-wrapper.jar
 
@@ -23,8 +23,4 @@ nbbuild/
 dist/
 nbdist/
 .nb-gradle/
-build.gradle
-gradle/
-gradlew
-gradlew.bat
 out/
