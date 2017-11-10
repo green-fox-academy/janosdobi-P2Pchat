@@ -10,6 +10,6 @@ public class OraclechatApplication {
 	private static final Logger logger = LoggerFactory.getLogger(OraclechatApplication.class);
 	public static void main(String[] args) {
 		SpringApplication.run(OraclechatApplication.class, args);
-		logger.info("--Application started");
+		logger.info("--Application started--");
 	}
 }

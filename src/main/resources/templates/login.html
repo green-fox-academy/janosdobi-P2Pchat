@@ -10,7 +10,7 @@
 
     <h1>Enter</h1>
 
-    <form class="form-inline" th:object="${user}">
+    <form class="form-inline" th:action="@{/enter}" th:object="${user}" method="post">
         <div class="form-group">
             <label>Choose your name:</label>
             <input type="text" class="form-control" th:field="*{name}" placeholder="Your name here"/>
