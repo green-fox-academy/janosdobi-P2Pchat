@@ -28,6 +28,12 @@ public class MainController {
 
     @PostMapping("/enter")
     public String enter(@ModelAttribute User user) {
-        return users.verifyUser(user);
+        if (!user.equals(null)) {
+            users.addUser(user);
+            return "redirect:/";
+        } else {
+            return "redirect:/enter";
+        }
+
     }
 }

@@ -30,11 +30,7 @@ public class UserService {
         userRepo.delete(id);
     }
 
-    public String verifyUser(User user) {
-        if (listAllUsers().contains(user)) {
-            return "redirect:/";
-        } else {
-            return "redirect:/enter";
-        }
+    public void addUser(User user) {
+        userRepo.save(user);
     }
 }
