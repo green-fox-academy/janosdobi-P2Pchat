@@ -14,8 +14,8 @@ public class UserService {
     @Autowired
     UserRepo userRepo;
 
-    public List<User> listAllUsers() {
-        List<User> users = new ArrayList<>();
+    public ArrayList<User> listAllUsers() {
+        ArrayList<User> users = new ArrayList<>();
         for (User u: userRepo.findAll()) {
             users.add(u);
         }
