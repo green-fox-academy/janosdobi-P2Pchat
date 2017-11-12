@@ -1,7 +1,9 @@
 package com.greenfox.oraclechat.controllers;
 
 
+import com.greenfox.oraclechat.model.Message;
 import com.greenfox.oraclechat.model.User;
+import com.greenfox.oraclechat.services.MessageService;
 import com.greenfox.oraclechat.services.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,6 +25,9 @@ public class MainController {
 
     @Autowired
     UserService users;
+
+    @Autowired
+    MessageService messages;
 
     //Enter page
 
@@ -52,6 +57,8 @@ public class MainController {
     public String index(@RequestParam(value = "userId", required = false) Long id, Model model, HttpServletRequest request) {
         User user = users.findOneUser(id);
         model.addAttribute(user);
+        model.addAttribute("defaultMessage", new Message("App", "Hi there! Submit your message using the send button!"));
+        model.addAttribute("messages", messages.listAll());
         logger.info("Request" + " " + request.getServletPath() + " " + request.getMethod() + " " + request.getQueryString());
         return "index";
     }

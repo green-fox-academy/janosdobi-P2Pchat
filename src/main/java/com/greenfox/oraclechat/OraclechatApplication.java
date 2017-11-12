@@ -7,6 +7,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class OraclechatApplication {
+
+    public static String CHAT_APP_LOGLEVEL = System.getenv("CHAT_APP_LOGLEVEL");
+    public static String CHAT_APP_UNIQUE_ID = System.getenv("CHAT_APP_UNIQUE_ID");
+    public static String CHAT_APP_PEER_ADDRESS = System.getenv("CHAT_APP_PEER_ADDRESS");
+
 	public static void main(String[] args) {
 		SpringApplication.run(OraclechatApplication.class, args);
 	}
