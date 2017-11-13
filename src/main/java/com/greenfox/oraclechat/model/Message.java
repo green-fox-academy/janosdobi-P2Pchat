@@ -5,34 +5,36 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 @Entity
-@SequenceGenerator(name="seq", initialValue = 1000000, allocationSize = 1000000)
 public class Message {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq")
     private long id;
     private String userName;
     private String text;
     private Timestamp createdAt;
 
     public Message(String userName, String text) {
+        this.id=(int) (1000000 + Math.random() * 9999999);
         this.userName = userName;
         this.text = text;
         this.createdAt = Timestamp.valueOf(LocalDateTime.now());
     }
 
-    public Message(String userName, String text, Timestamp createdAt) {
+    public Message(long id, String userName, String text, Timestamp createdAt) {
+        this.id = id;
         this.userName = userName;
         this.text = text;
         this.createdAt = createdAt;
     }
 
     public Message(String userName) {
+        this.id=(int) (1000000 + Math.random() * 9999999);
         this.userName = userName;
         this.createdAt = Timestamp.valueOf(LocalDateTime.now());
     }
 
     public Message() {
+        this.id=(int) (1000000 + Math.random() * 9999999);
         this.createdAt = Timestamp.valueOf(LocalDateTime.now());
     }
 

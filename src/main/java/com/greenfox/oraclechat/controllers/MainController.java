@@ -54,7 +54,7 @@ public class MainController {
     //Index page
 
     @GetMapping("/index")
-    public String index(@RequestParam(value = "userId", required = false) Long id, Model model, HttpServletRequest request) {
+    public String index(@RequestParam(value = "userId") Long id, Model model, HttpServletRequest request) {
         User user = users.findOneUser(id);
         model.addAttribute(user);
         model.addAttribute("defaultMessage", new Message("App", "Hi there! Submit your message using the send button!"));
