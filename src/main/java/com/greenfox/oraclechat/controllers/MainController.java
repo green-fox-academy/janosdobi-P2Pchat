@@ -8,15 +8,9 @@ import com.greenfox.oraclechat.services.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.web.client.RestTemplateBuilder;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -32,28 +26,32 @@ public class MainController {
     @Autowired
     MessageService messages;
 
+    @ExceptionHandler(Exception.class)
+    public void excepitonHandling(HttpServletRequest request) {
+        logger.error("Request" + " " + request.getServletPath() + " " + request.getMethod() + " " + request.getQueryString());
+    }
+
     //Enter page
 
     @GetMapping({"/", ""})
-    public String enter(@ModelAttribute User user, Model model, HttpServletRequest request) {
+    public String enter(Model model, HttpServletRequest request) {
         model.addAttribute("user", new User());
         logger.info("Request" + " " + request.getServletPath() + " " + request.getMethod() + " " + request.getQueryString());
-        if (user.getName()==null) {
-            model.addAttribute("errorMessage", "Please enter a username!");
-            return "login";
-        }
         return "login";
     }
 
     @PostMapping({"/", ""})
-    public String enter(@ModelAttribute User user, HttpServletRequest request) {
+    public String enter(@ModelAttribute User user, Model model, HttpServletRequest request) {
+        if (user.getName().equals("")) {
+            model.addAttribute("errorMessage", "Please enter a username!");
+            return "login";
+        }
         for (User u : users.listAllUsers()) {
             if (u.getName().equals(user.getName())) {
                 logger.info("Request" + " " + request.getServletPath() + " " + request.getMethod() + " " + request.getQueryString());
                 return "redirect:/index?userId=" + u.getId();
             }
         }
-        logger.error("Request" + " " + request.getServletPath() + " " + request.getMethod() + " " + request.getQueryString());
         return "redirect:/";
     }
 
@@ -77,10 +75,10 @@ public class MainController {
         return "redirect:/index?userId=" + user.getId();
     }
 
-    @PostMapping("/index/addmessage")
-    public String addMessage(@ModelAttribute Message message, HttpServletRequest request) {
+    @PostMapping("/index/{userId}/addmessage")
+    public String addMessage(@PathVariable long userId, @ModelAttribute Message message, HttpServletRequest request) {
         messages.addMessage(message);
         logger.info("Request" + " " + request.getServletPath() + " " + request.getMethod() + " " + request.getQueryString());
-        return "redirect:/index?userId=1";
+        return "redirect:/index?userId=" + userId;
     }
 }

@@ -7,6 +7,7 @@
 </head>
 
     <body>
+    <div class="container-fluid">
         <h1>Oracle Peer to Peer Chat</h1>
         <form class="form-inline" th:action="@{/index}" th:object="${user}" method="post">
             <div class="form-group">
@@ -27,14 +28,16 @@
             <p th:text="*{text}"/>
         </ul>
 
-        <form class="form-inline" th:action="@{/index/addmessage}" th:object="${newMessage}" method="post">
+        <form class="form-inline" th:action="@{'/index/{userId}/addmessage'(userId=${user.id})}" th:object="${newMessage}" method="post">
             <div class="form-group">
                 <input type="text" class="form-control" th:field="*{text}"/>
                 <input type="hidden" th:field="*{userName}"/>
             </div>
             <button type="submit" class="btn btn-default">Send</button>
         </form>
-        <a class="btn btn-default" href="/index?userId=1">Refresh</a>
+        <a class="btn btn-default" th:href="@{'/index?userId={userId}'(userId=${user.id})}">Refresh</a>
+
+    </div>
 
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     </body>

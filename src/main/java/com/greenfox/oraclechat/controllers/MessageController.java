@@ -6,12 +6,11 @@ import com.greenfox.oraclechat.model.Message;
 import com.greenfox.oraclechat.model.Status;
 import com.greenfox.oraclechat.services.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 @RestController
@@ -31,10 +30,14 @@ public class MessageController {
         }
     }
 
-/*    @PostMapping("/index/addmessage")
-    public ResponseEntity<String> sendMessage() {
+    @GetMapping("/index/addmessage")
+    public ResponseEntity<Holder> sendMessage() {
         RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity<String> response = restTemplate.getForEntity("http://oraclechat.herokuapp.com/api/message/receive", String.class);
+        Message m = new Message("Jani", "testmessage");
+        Client c = new Client("janosdobi");
+        HttpEntity<Holder> request = new HttpEntity<>(new Holder(m,c));
+        ResponseEntity<Holder> response = restTemplate
+                .exchange("http://oraclechat.herokuapp.com/api/message/receive", HttpMethod.POST, request, Holder.class);
         return response;
-    }*/
+    }
 }

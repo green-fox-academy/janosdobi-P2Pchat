@@ -15,6 +15,10 @@ public class MessageService {
         return messageRepo.findAll();
     }
 
+    public Message getMessage(long id) {
+        return messageRepo.findOne(id);
+    }
+
     public void addMessage (Message m) {
         messageRepo.save(m);
     }
