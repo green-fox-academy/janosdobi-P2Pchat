@@ -59,6 +59,7 @@ public class MainController {
         model.addAttribute(user);
         model.addAttribute("defaultMessage", new Message("App", "Hi there! Submit your message using the send button!"));
         model.addAttribute("messages", messages.listAll());
+        model.addAttribute("newMessage", new Message(user.getName()));
         logger.info("Request" + " " + request.getServletPath() + " " + request.getMethod() + " " + request.getQueryString());
         return "index";
     }
@@ -72,6 +73,6 @@ public class MainController {
     @PostMapping("/index/addmessage")
     public String addMessage(@ModelAttribute Message message) {
         messages.addMessage(message);
-        return "redirect:";
+        return "redirect:/index?userId=1";
     }
 }

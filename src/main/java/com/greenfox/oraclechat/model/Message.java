@@ -1,11 +1,11 @@
 package com.greenfox.oraclechat.model;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 @Entity
-@SequenceGenerator(name="seq", initialValue = 1000000, allocationSize = 8999999)
+@SequenceGenerator(name="seq", initialValue = 1000000, allocationSize = 1000000)
 public class Message {
 
     @Id
@@ -13,12 +13,27 @@ public class Message {
     private long id;
     private String userName;
     private String text;
-    private String createdAt;
+    private Timestamp createdAt;
 
     public Message(String userName, String text) {
         this.userName = userName;
         this.text = text;
-        this.createdAt = LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
+        this.createdAt = Timestamp.valueOf(LocalDateTime.now());
+    }
+
+    public Message(String userName, String text, Timestamp createdAt) {
+        this.userName = userName;
+        this.text = text;
+        this.createdAt = createdAt;
+    }
+
+    public Message(String userName) {
+        this.userName = userName;
+        this.createdAt = Timestamp.valueOf(LocalDateTime.now());
+    }
+
+    public Message() {
+        this.createdAt = Timestamp.valueOf(LocalDateTime.now());
     }
 
     public long getId() {
@@ -45,11 +60,11 @@ public class Message {
         this.text = text;
     }
 
-    public String getCreatedAt() {
+    public Timestamp getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(String createdAt) {
+    public void setCreatedAt(Timestamp createdAt) {
         this.createdAt = createdAt;
     }
 }
