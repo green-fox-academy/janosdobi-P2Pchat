@@ -68,4 +68,10 @@ public class MainController {
         users.addUser(user);
         return "redirect:/index?userId=" + user.getId();
     }
+
+    @PostMapping("/index/addmessage")
+    public String addMessage(@ModelAttribute Message message) {
+        messages.addMessage(message);
+        return "redirect:";
+    }
 }

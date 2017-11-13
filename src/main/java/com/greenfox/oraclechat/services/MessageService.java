@@ -14,4 +14,9 @@ public class MessageService {
     public Iterable<Message> listAll() {
         return messageRepo.findAll();
     }
+
+    public void addMessage (Message m) {
+        messageRepo.save(m);
+    }
+
 }
