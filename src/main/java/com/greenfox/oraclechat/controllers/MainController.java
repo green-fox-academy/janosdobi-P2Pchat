@@ -8,12 +8,15 @@ import com.greenfox.oraclechat.services.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -32,10 +35,13 @@ public class MainController {
     //Enter page
 
     @GetMapping({"/", ""})
-    public String enter(Model model, HttpServletRequest request) {
+    public String enter(@ModelAttribute User user, Model model, HttpServletRequest request) {
         model.addAttribute("user", new User());
         logger.info("Request" + " " + request.getServletPath() + " " + request.getMethod() + " " + request.getQueryString());
-
+        if (user.getName()==null) {
+            model.addAttribute("errorMessage", "Please enter a username!");
+            return "login";
+        }
         return "login";
     }
 
@@ -65,14 +71,16 @@ public class MainController {
     }
 
     @PostMapping("/index")
-    public String updateUsername(@ModelAttribute User user) {
+    public String updateUsername(@ModelAttribute User user, HttpServletRequest request) {
         users.addUser(user);
+        logger.info("Request" + " " + request.getServletPath() + " " + request.getMethod() + " " + request.getQueryString());
         return "redirect:/index?userId=" + user.getId();
     }
 
     @PostMapping("/index/addmessage")
-    public String addMessage(@ModelAttribute Message message) {
+    public String addMessage(@ModelAttribute Message message, HttpServletRequest request) {
         messages.addMessage(message);
+        logger.info("Request" + " " + request.getServletPath() + " " + request.getMethod() + " " + request.getQueryString());
         return "redirect:/index?userId=1";
     }
 }

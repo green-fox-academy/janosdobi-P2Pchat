@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
 @RestController
 public class MessageController {
@@ -29,4 +30,11 @@ public class MessageController {
             return new ResponseEntity(new Status("ok"), HttpStatus.OK);
         }
     }
+
+/*    @PostMapping("/index/addmessage")
+    public ResponseEntity<String> sendMessage() {
+        RestTemplate restTemplate = new RestTemplate();
+        ResponseEntity<String> response = restTemplate.getForEntity("http://oraclechat.herokuapp.com/api/message/receive", String.class);
+        return response;
+    }*/
 }
