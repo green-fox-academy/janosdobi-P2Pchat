@@ -31,10 +31,10 @@ public class MessageService {
         messageRepo.save(m);
     }
 
-    public ResponseEntity<Status> sendMessage(Message m, Client c) {
+    public Status sendMessage(Message m, Client c) {
         RestTemplate restTemplate = new RestTemplate();
         HttpEntity<Holder> request = new HttpEntity<>(new Holder(m, c));
-        ResponseEntity<Status> response = restTemplate.postForObject(OraclechatApplication.CHAT_APP_PEER_ADDRESS, request, ResponseEntity.class);
+        Status response = restTemplate.postForObject(OraclechatApplication.CHAT_APP_PEER_ADDRESS, request, Status.class);
         return response;
     }
 }
