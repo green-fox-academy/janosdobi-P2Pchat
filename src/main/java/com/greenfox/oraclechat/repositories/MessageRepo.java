@@ -6,6 +6,7 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface MessageRepo extends CrudRepository<Message, Long> {
 
-    @Query(value = "SELECT * FROM message ORDER BY created_at DESC LIMIT 10", nativeQuery = true)
+    @Query(value = "SELECT * FROM message ORDER BY created_at ASC" +
+            " LIMIT 10 OFFSET ((SELECT count(*) FROM message) - 10)", nativeQuery = true)
     Iterable<Message> listTenMostRecent();
 }
