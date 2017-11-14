@@ -29,15 +29,4 @@ public class MessageController {
             return new ResponseEntity(new Status("ok"), HttpStatus.OK);
         }
     }
-
-    @GetMapping("/index/addmessage")
-    public ResponseEntity<Holder> sendMessage() {
-        RestTemplate restTemplate = new RestTemplate();
-        Message m = new Message("Jani", "testmessage");
-        Client c = new Client("janosdobi");
-        HttpEntity<Holder> request = new HttpEntity<>(new Holder(m,c));
-        ResponseEntity<Holder> response = restTemplate
-                .exchange("http://oraclechat.herokuapp.com/api/message/receive", HttpMethod.POST, request, Holder.class);
-        return response;
-    }
 }
