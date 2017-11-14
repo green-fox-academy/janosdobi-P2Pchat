@@ -90,11 +90,11 @@ public class MainController {
 
     //Websocket
 
-    @MessageMapping("/api/message/receive")
+/*    @MessageMapping("/api/message/receive")
     public String addOthersMessage(@PathVariable long userId, @ModelAttribute Message message, HttpServletRequest request) throws Exception {
         Thread.sleep(1000); // simulated delay
         messages.addMessage(message);
         logger.info("Request" + " " + request.getServletPath() + " " + request.getMethod() + " " + request.getQueryString());
         return "redirect:/index?userId=" + userId;
-    }
+    }*/
 }
