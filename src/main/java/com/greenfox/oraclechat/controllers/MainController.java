@@ -10,6 +10,8 @@ import com.greenfox.oraclechat.services.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -78,10 +80,23 @@ public class MainController {
         return "redirect:/index?userId=" + user.getId();
     }
 
-    @PostMapping("/index/{userId}/addmessage")
+/*    @PostMapping("/index/{userId}/addmessage")
     public String addMessage(@PathVariable long userId, @ModelAttribute Message message, HttpServletRequest request) {
         messages.addMessage(message);
         messages.sendMessage(message,new Client(OraclechatApplication.CHAT_APP_UNIQUE_ID));
+        logger.info("Request" + " " + request.getServletPath() + " " + request.getMethod() + " " + request.getQueryString());
+        return "redirect:/index?userId=" + userId;
+    }*/
+
+    //Websocket
+
+    @MessageMapping("/api/message/receive")
+    @SendTo("/index/{userId}/addmessage")
+    @PostMapping("/index/{userId}/addmessage")
+    public String addMessage(@PathVariable long userId, @ModelAttribute Message message, HttpServletRequest request) throws Exception {
+        Thread.sleep(1000); // simulated delay
+        messages.addMessage(message);
+        messages.sendMessage(message, new Client(OraclechatApplication.CHAT_APP_UNIQUE_ID));
         logger.info("Request" + " " + request.getServletPath() + " " + request.getMethod() + " " + request.getQueryString());
         return "redirect:/index?userId=" + userId;
     }

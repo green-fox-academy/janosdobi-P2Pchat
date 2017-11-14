@@ -14,7 +14,7 @@ public class Message {
     private Timestamp createdAt;
 
     public Message(String userName, String text) {
-        this.id=(int) (1000000 + Math.random() * 9999999);
+        this.id=(int) (1000000 + (Math.random() * 9999999));
         this.userName = userName;
         this.text = text;
         this.createdAt = Timestamp.valueOf(LocalDateTime.now());
@@ -28,13 +28,13 @@ public class Message {
     }
 
     public Message(String userName) {
-        this.id=(int) (1000000 + Math.random() * 9999999);
+        this.id=(int) (1000000 + (Math.random() * 9999999));
         this.userName = userName;
         this.createdAt = Timestamp.valueOf(LocalDateTime.now());
     }
 
     public Message() {
-        this.id=(int) (1000000 + Math.random() * 9999999);
+        this.id=(int) (1000000 + (Math.random() * 9999999));
         this.createdAt = Timestamp.valueOf(LocalDateTime.now());
     }
 

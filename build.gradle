@@ -32,4 +32,5 @@ dependencies {
 	compileOnly('org.projectlombok:lombok')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 	compile 'org.postgresql:postgresql:9.4-1201-jdbc4'
+	compile('org.springframework.boot:spring-boot-starter-websocket')
 }
