@@ -1,6 +1,7 @@
 package com.greenfox.oraclechat.controllers;
 
 
+import com.greenfox.oraclechat.OraclechatApplication;
 import com.greenfox.oraclechat.model.Client;
 import com.greenfox.oraclechat.model.Message;
 import com.greenfox.oraclechat.model.User;
@@ -80,7 +81,7 @@ public class MainController {
     @PostMapping("/index/{userId}/addmessage")
     public String addMessage(@PathVariable long userId, @ModelAttribute Message message, HttpServletRequest request) {
         messages.addMessage(message);
-        messages.sendMessage(message,new Client("janosdobi"));
+        messages.sendMessage(message,new Client(OraclechatApplication.CHAT_APP_UNIQUE_ID));
         logger.info("Request" + " " + request.getServletPath() + " " + request.getMethod() + " " + request.getQueryString());
         return "redirect:/index?userId=" + userId;
     }
