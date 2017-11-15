@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
+import org.springframework.web.client.RestTemplate;
 
 @RestController
 public class MessageController {
@@ -33,6 +34,8 @@ public class MessageController {
         if(statusChecker.getMessageStatus(incomingMessage)&&!(messageSender.getId()== OraclechatApplication.CHAT_APP_UNIQUE_ID)) {
             messages.addMessage(incomingMessage);
             simpMessagingTemplate.convertAndSend("/socket", "");
+            /*RestTemplate restTemplate = new RestTemplate();
+            restTemplate.postForObject(OraclechatApplication.CHAT_APP_PEER_ADDRESS, incomingMessage, Status.class);*/
             return new ResponseEntity(new Status("ok"), HttpStatus.OK);
         } else {
             return new ResponseEntity(new Status("error", "Something is wrong with your message!"), HttpStatus.UNAUTHORIZED);

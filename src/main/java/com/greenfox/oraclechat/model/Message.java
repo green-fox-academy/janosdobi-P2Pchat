@@ -11,31 +11,31 @@ public class Message {
     private long id;
     private String userName;
     private String text;
-    private Timestamp createdAt;
+    private Timestamp timestamp;
 
     public Message(String userName, String text) {
         this.id=(int) (1000000 + (Math.random() * 9999999));
         this.userName = userName;
         this.text = text;
-        this.createdAt = Timestamp.valueOf(LocalDateTime.now());
+        this.timestamp = Timestamp.valueOf(LocalDateTime.now());
     }
 
-    public Message(long id, String userName, String text, Timestamp createdAt) {
+    public Message(long id, String userName, String text, Timestamp timestamp) {
         this.id = id;
         this.userName = userName;
         this.text = text;
-        this.createdAt = createdAt;
+        this.timestamp = timestamp;
     }
 
     public Message(String userName) {
         this.id=(int) (1000000 + (Math.random() * 9999999));
         this.userName = userName;
-        this.createdAt = Timestamp.valueOf(LocalDateTime.now());
+        this.timestamp = Timestamp.valueOf(LocalDateTime.now());
     }
 
     public Message() {
         this.id=(int) (1000000 + (Math.random() * 9999999));
-        this.createdAt = Timestamp.valueOf(LocalDateTime.now());
+        this.timestamp = Timestamp.valueOf(LocalDateTime.now());
     }
 
     public long getId() {
@@ -62,11 +62,11 @@ public class Message {
         this.text = text;
     }
 
-    public Timestamp getCreatedAt() {
-        return createdAt;
+    public Timestamp getTimestamp() {
+        return timestamp;
     }
 
-    public void setCreatedAt(Timestamp createdAt) {
-        this.createdAt = createdAt;
+    public void setTimestamp(Timestamp timestamp) {
+        this.timestamp = timestamp;
     }
 }
