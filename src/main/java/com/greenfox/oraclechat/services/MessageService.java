@@ -21,10 +21,6 @@ public class MessageService {
         return messageRepo.findAll();
     }
 
-    public Iterable<Message> listTenMostRecent() {
-        return messageRepo.listTenMostRecent();
-    }
-
     public Message getMessage(long id) {
         return messageRepo.findOne(id);
     }
