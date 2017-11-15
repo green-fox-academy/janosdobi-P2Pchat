@@ -1,10 +1,11 @@
+var stompClient = null;
+
 function connect() {
-    var socket = new SockJS('/chat');
+    var socket = new SockJS('/server');
     stompClient = Stomp.over(socket);
     stompClient.connect({}, function () {
-        stompClient.subscribe('/api/message/receive', function (message) {
-            console.log(message);
-            window.location.reload();
+        stompClient.subscribe('/socket', function () {
+            location.reload();
         });
     });
 }
