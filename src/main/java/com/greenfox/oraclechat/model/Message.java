@@ -9,27 +9,27 @@ public class Message {
 
     @Id
     private long id;
-    private String userName;
+    private String username;
     private String text;
     private Timestamp timestamp;
 
-    public Message(String userName, String text) {
+    public Message(String username, String text) {
         this.id=(int) (1000000 + (Math.random() * 9999999));
-        this.userName = userName;
+        this.username = username;
         this.text = text;
         this.timestamp = Timestamp.valueOf(LocalDateTime.now());
     }
 
-    public Message(long id, String userName, String text, Timestamp timestamp) {
+    public Message(long id, String username, String text, Timestamp timestamp) {
         this.id = id;
-        this.userName = userName;
+        this.username = username;
         this.text = text;
         this.timestamp = timestamp;
     }
 
-    public Message(String userName) {
+    public Message(String username) {
         this.id=(int) (1000000 + (Math.random() * 9999999));
-        this.userName = userName;
+        this.username = username;
         this.timestamp = Timestamp.valueOf(LocalDateTime.now());
     }
 
@@ -46,12 +46,12 @@ public class Message {
         this.id = id;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getText() {

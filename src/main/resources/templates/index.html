@@ -24,19 +24,19 @@
         <a class="btn btn-primary" th:href="@{'/index?userId={userId}'(userId=${user.id})}">Refresh</a>
 
         <ul th:object="${defaultMessage}">
-            <li th:text="*{userName}"/>
+            <li th:text="*{username}"/>
             <p class="bg-info" th:text="*{text}"/>
         </ul>
 
         <ul th:each="message : ${messages}" th:object="${message}">
-            <li th:text="*{userName}"/>
-            <p th:class="*{userName}=='Jani' ? 'bg-warning' : 'bg-info'" th:text="*{text}"/>
+            <li th:text="*{username}"/>
+            <p th:class="*{username}=='Jani' ? 'bg-warning' : 'bg-info'" th:text="*{text}"/>
         </ul>
 
         <form class="form-inline" th:action="@{'/index/{userId}/addmessage'(userId=${user.id})}" th:object="${newMessage}" method="post">
             <div class="form-group">
                 <input type="text" class="form-control" th:field="*{text}"/>
-                <input type="hidden" th:field="*{userName}"/>
+                <input type="hidden" th:field="*{username}"/>
             </div>
             <button type="submit" class="btn btn-primary">Send</button>
         </form>

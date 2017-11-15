@@ -2,7 +2,7 @@ package com.greenfox.oraclechat.services;
 
 import com.greenfox.oraclechat.OraclechatApplication;
 import com.greenfox.oraclechat.model.Client;
-import com.greenfox.oraclechat.model.Holder;
+import com.greenfox.oraclechat.model.IncomingClientMessage;
 import com.greenfox.oraclechat.model.Message;
 import com.greenfox.oraclechat.model.Status;
 import com.greenfox.oraclechat.repositories.MessageRepo;
@@ -35,7 +35,7 @@ public class MessageService {
 
     public Status sendMessage(Message m, Client c) {
         RestTemplate restTemplate = new RestTemplate();
-        HttpEntity<Holder> request = new HttpEntity<>(new Holder(m, c));
+        HttpEntity<IncomingClientMessage> request = new HttpEntity<>(new IncomingClientMessage(m, c));
         Status response = restTemplate.postForObject(OraclechatApplication.CHAT_APP_PEER_ADDRESS, request, Status.class);
         return response;
     }

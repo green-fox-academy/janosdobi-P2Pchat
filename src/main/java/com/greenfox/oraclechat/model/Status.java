@@ -1,8 +1,6 @@
 package com.greenfox.oraclechat.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Status {
@@ -30,8 +28,6 @@ public class Status {
         this.status = status;
     }
 
-    @JsonIgnore
-    @JsonProperty(value = "message")
     public String getMessage() {
         return message;
     }

@@ -2,7 +2,7 @@ package com.greenfox.oraclechat.controllers;
 
 import com.greenfox.oraclechat.OraclechatApplication;
 import com.greenfox.oraclechat.model.Client;
-import com.greenfox.oraclechat.model.Holder;
+import com.greenfox.oraclechat.model.IncomingClientMessage;
 import com.greenfox.oraclechat.model.Message;
 import com.greenfox.oraclechat.model.Status;
 import com.greenfox.oraclechat.services.MessageService;
@@ -12,7 +12,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
-import org.springframework.web.client.RestTemplate;
 
 @RestController
 public class MessageController {
@@ -28,11 +27,11 @@ public class MessageController {
 
     @PostMapping("/api/message/receive")
     @CrossOrigin("*")
-    public ResponseEntity receiveMessage(@RequestBody Holder holder) {
-        Message incomingMessage = holder.getMessage();
-        Client messageSender = holder.getClient();
-        if(statusChecker.getMessageStatus(incomingMessage)&&!(messageSender.getId()== OraclechatApplication.CHAT_APP_UNIQUE_ID)) {
-            messages.addMessage(incomingMessage);
+    public ResponseEntity receiveMessage(@RequestBody IncomingClientMessage icm) {
+        Message m = icm.getMessage();
+        Client c = icm.getClient();
+        if(statusChecker.getMessageStatus(m)&&(c.getId()!=OraclechatApplication.CHAT_APP_UNIQUE_ID)) {
+            messages.addMessage(m);
             simpMessagingTemplate.convertAndSend("/socket", "");
             /*RestTemplate restTemplate = new RestTemplate();
             restTemplate.postForObject(OraclechatApplication.CHAT_APP_PEER_ADDRESS, incomingMessage, Status.class);*/

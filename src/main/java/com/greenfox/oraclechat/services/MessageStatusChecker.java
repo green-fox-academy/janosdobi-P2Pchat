@@ -6,15 +6,24 @@ import org.springframework.stereotype.Service;
 @Service
 public class MessageStatusChecker {
 
+    private String message;
+
     public boolean getMessageStatus(Message m) {
         if (m.getTimestamp()==null ) {
+            message = "timestamp";
             return false;
-        } else if (m.getUserName()==null) {
+        } else if (m.getUsername()==null) {
+            message = "username";
             return false;
         } else if (m.getText()==null) {
+            message = "text";
             return false;
         } else {
             return true;
         }
+    }
+
+    public String getMessage() {
+        return message;
     }
 }

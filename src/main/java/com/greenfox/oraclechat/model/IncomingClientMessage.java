@@ -1,16 +1,16 @@
 package com.greenfox.oraclechat.model;
 
-public class Holder {
+public class IncomingClientMessage {
 
     private Message message;
     private Client client;
 
-    public Holder(Message message, Client client) {
+    public IncomingClientMessage(Message message, Client client) {
         this.message = message;
         this.client = client;
     }
 
-    public Holder() {
+    public IncomingClientMessage() {
     }
 
     public Message getMessage() {
