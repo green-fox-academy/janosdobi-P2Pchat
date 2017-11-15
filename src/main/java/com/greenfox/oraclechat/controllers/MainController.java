@@ -67,7 +67,7 @@ public class MainController {
         User user = users.findOneUser(id);
         model.addAttribute(user);
         model.addAttribute("defaultMessage", new Message("App", "Hi there! Submit your message using the send button!"));
-        model.addAttribute("messages", messages.listAll());
+        model.addAttribute("messages", messages.listTenMostRecent());
         model.addAttribute("newMessage", new Message(user.getName()));
         logger.info("Request" + " " + request.getServletPath() + " " + request.getMethod() + " " + request.getQueryString());
         return "index";
