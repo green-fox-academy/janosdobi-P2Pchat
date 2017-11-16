@@ -13,6 +13,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 
+import java.util.List;
+
 @RestController
 public class MessageController {
 
@@ -39,6 +41,10 @@ public class MessageController {
         } else {
             return new ResponseEntity(new Status("error", "Something is wrong with your message!"), HttpStatus.UNAUTHORIZED);
         }
+    }
 
+    @GetMapping("/api/messages")
+    public Iterable<Message> getMessages() {
+        return messages.listTenMostRecent();
     }
 }
